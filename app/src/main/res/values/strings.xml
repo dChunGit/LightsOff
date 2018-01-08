@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Lights Off</string>
+
+    <string name="admin_description">Admin Description</string>
+    <string name="start">Start</string>
+    <string name="default_tile">Light Off</string>
+
+    <string-array name="dialog">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+    </string-array>
+</resources>

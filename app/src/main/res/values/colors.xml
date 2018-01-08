@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorAccent">#607D8B</color>
+    <color name="darkGrey">#474d56</color>
+    <color name="green">#09c64c</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#d1d1d1</color>
+    <color name="red">#fc2020</color>
+    <color name="lightblue">#4286f4</color>
+    <color name="textColorHint">#474d56</color>
+    <color name="textColor">#000000</color>
+    <color name="background">#FFFFFF</color>
+    <color name="backgroundalt">#727272</color>
+    <color name="textColoralt">#FFFFFF</color>
+
+    <color name="first">#03A9F4</color>
+    <color name="firstButton">#0288D1</color>
+    <color name="second">#607D8B</color>
+    <color name="secondButton">#455A64</color>
+    <color name="third">#9C27B0</color>
+    <color name="thirdButton">#00796B</color>
+    <color name="fourth">#536DFE</color>
+    <color name="fourthButton">#673AB7</color>
+    <color name="fifth">#009688</color>
+    <color name="fifthButton">#00796B</color>
+    <color name="sixth">#4CAF50</color>
+    <color name="sixthButton">#388E3C</color>
+
+
+</resources>
