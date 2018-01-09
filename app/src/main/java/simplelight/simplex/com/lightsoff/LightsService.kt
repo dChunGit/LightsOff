@@ -20,11 +20,6 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-
-/**
- * Created by dwsch on 7/30/2017.
- */
-
 class LightsService: Service() {
     private var postChannel = "post_channel"
     private var notificationId = 1
@@ -55,13 +50,13 @@ class LightsService: Service() {
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF)
         registerReceiver(mScreenStateReceiver, screenStateFilter)
 
-        var timeout = intent.getLongExtra("time", 0)
+        val timeout = intent.getLongExtra("time", 0)
 
-        scheduler = Executors.newScheduledThreadPool(1)
-        println(timeout)
-        scheduler.schedule(ScreenRunnable(this), timeout, TimeUnit.MINUTES)
-        /*Settings.System.putInt(contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 10)
-        println(Settings.System.getInt(contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 60000))*/
+        if(timeout != 0L) {
+            scheduler = Executors.newScheduledThreadPool(1)
+            println(timeout)
+            scheduler.schedule(ScreenRunnable(this), timeout, TimeUnit.MINUTES)
+        }
 
         if (intent.action == ServiceParams.STOP_SERVICE.toString()) {
             println("stopping")
@@ -70,13 +65,11 @@ class LightsService: Service() {
         }
 
         if (intent.action == ServiceParams.START_FOREGROUND.toString()) {
-
-            // startForeground(...);
-
+            println("starting")
             return START_STICKY
         }
 
-        if (intent.action ==ServiceParams.STOP_FOREGROUND.toString()) {
+        if (intent.action == ServiceParams.STOP_FOREGROUND.toString()) {
             stopForeground(true)
             return START_STICKY
         }

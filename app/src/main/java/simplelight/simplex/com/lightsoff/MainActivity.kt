@@ -72,6 +72,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val sharedPref = getSharedPreferences(DEVICE_STORE, Context.MODE_PRIVATE)
+        menu.findItem(R.id.root).setChecked(sharedPref.getBoolean(ROOT, false))
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -82,16 +88,15 @@ class MainActivity : AppCompatActivity() {
             R.id.root -> {
                 val sharedPref = getSharedPreferences(DEVICE_STORE, Context.MODE_PRIVATE)
                 val editor = sharedPref.edit()
-                if(item.isChecked) {
-                    if (RootTools.isAccessGiven()) {
-                        editor.putBoolean(ROOT, true).apply()
-                    } else {
-                        editor.putBoolean(ROOT, true).apply()
-                    }
+                item.setChecked(true)
 
+                if (RootTools.isAccessGiven()) {
+                    editor.putBoolean(ROOT, true).apply()
                 } else {
                     editor.putBoolean(ROOT, false).apply()
+                    item.setChecked(false)
                 }
+
 
             }
         }
