@@ -36,5 +36,8 @@ dependencies {
     implementation(name: 'RootShell', ext:'aar')
     implementation 'com.shawnlin:number-picker:2.4.4'
     implementation 'com.yarolegovich:lovely-dialog:1.0.7'
+    implementation 'com.fxn769:numpad:1.0'
+    implementation 'com.github.pinball83:masked-edittext:1.0.3'
+
 
 }

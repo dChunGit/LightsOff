@@ -8,11 +8,8 @@ import android.widget.Toast
 import android.graphics.drawable.Icon
 import android.support.annotation.RequiresApi
 import android.util.Log
+import com.stericson.RootTools.RootTools
 
-
-/**
- * Created by dwsch on 7/31/2017.
- */
 @RequiresApi(api = 24)
 class QSTileService: TileService() {
     private val TAG = "QSTILE"
@@ -62,17 +59,18 @@ class QSTileService: TileService() {
             Toast.makeText(this, "New State: ACTIVE", Toast.LENGTH_SHORT).show()
             changeTileState(Tile.STATE_ACTIVE)
 
-            var sharedPref = getSharedPreferences(DEVICE_STORE, Context.MODE_PRIVATE)
-            if (sharedPref.getBoolean(ADMIN_STATUS, false)) {
+            val sharedPref = getSharedPreferences(DEVICE_STORE, Context.MODE_PRIVATE)
+            if (sharedPref.getBoolean(ADMIN_STATUS, false) ||
+                    (sharedPref.getBoolean(ROOT, false) && RootTools.isAccessGiven())) {
 
-                var intent = Intent(applicationContext, LightsService::class.java)
-                var sharedPref = getSharedPreferences(DEVICE_STORE, Context.MODE_PRIVATE)
-                var time = sharedPref.getInt(SAVED_TIME, 5)
+                val intent = Intent(applicationContext, LightsService::class.java)
+                val time = sharedPref.getInt(SAVED_TIME, 5)
                 intent.putExtra("time", time.toLong())
                 startService(intent)
 
             } else {
-                Toast.makeText(this, "Enable Device Administrator Before Using Tile", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Enable Device Administrator or Root " +
+                        "Before Using Tile", Toast.LENGTH_LONG).show()
             }
             //startActivityAndCollapse()
 
@@ -80,7 +78,8 @@ class QSTileService: TileService() {
     }
 
     private fun changeTileState(newState: Int) {
-        qsTile.icon = Icon.createWithResource(this, if (newState == Tile.STATE_INACTIVE) R.drawable.ic_tile else R.drawable.ic_tile)
+        qsTile.icon = Icon.createWithResource(this,
+                if (newState == Tile.STATE_INACTIVE) R.drawable.ic_tile else R.drawable.ic_tile)
         qsTile.state = newState
         qsTile.updateTile()
     }

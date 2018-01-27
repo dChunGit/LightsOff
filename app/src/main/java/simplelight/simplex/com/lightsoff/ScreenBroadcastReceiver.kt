@@ -7,9 +7,6 @@ import android.content.Context
 import android.provider.Settings
 
 
-/**
- * Created by dwsch on 7/30/2017.
- */
 class ScreenBroadcastReceiver constructor(service: LightsService): BroadcastReceiver() {
     private var lightService = service
 
@@ -19,7 +16,7 @@ class ScreenBroadcastReceiver constructor(service: LightsService): BroadcastRece
             /*Settings.System.putInt(context.contentResolver,Settings.System.SCREEN_OFF_TIMEOUT, defaultTime)
             println(Settings.System.getInt(context.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 60000))*/
 
-            var lightIntent = Intent(context, LightsService::class.java)
+            val lightIntent = Intent(context, LightsService::class.java)
             lightIntent.action = ServiceParams.STOP_SERVICE.toString()
             lightService.onStartCommand(lightIntent, 0, 0)
 
